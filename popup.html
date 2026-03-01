@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL to Google Drive</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { width: 360px; font-family: 'Segoe UI', Roboto, Arial, sans-serif; background: #ffffff; color: #202124; }
+    .header { display: flex; align-items: center; gap: 10px; padding: 16px 16px 12px; border-bottom: 1px solid #e8eaed; }
+    .header-icon { width: 28px; height: 28px; }
+    .header h1 { font-size: 15px; font-weight: 600; color: #1a73e8; }
+    .body { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .field-group { display: flex; flex-direction: column; gap: 4px; }
+    label { font-size: 11px; font-weight: 600; color: #5f6368; text-transform: uppercase; letter-spacing: 0.5px; }
+    .input-row { display: flex; gap: 6px; }
+    input[type="text"] { flex: 1; padding: 8px 10px; border: 1px solid #dadce0; border-radius: 6px; font-size: 13px; color: #202124; background: #f8f9fa; outline: none; transition: border-color 0.15s; }
+    input[type="text"]:focus { border-color: #1a73e8; background: #fff; }
+    .btn-tab { padding: 8px 10px; background: #e8f0fe; border: 1px solid #c5d6f7; border-radius: 6px; color: #1a73e8; font-size: 11px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
+    .btn-tab:hover { background: #d2e3fc; }
+    .btn-save { width: 100%; padding: 10px; background: #1a73e8; color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.15s; }
+    .btn-save:hover:not(:disabled) { background: #1558b0; }
+    .btn-save:disabled { background: #9aa0a6; cursor: default; }
+    .status { display: none; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 6px; font-size: 13px; }
+    .status.success { display: flex; background: #e6f4ea; color: #137333; }
+    .status.error { display: flex; background: #fce8e6; color: #c5221f; }
+    .status.loading { display: flex; background: #e8f0fe; color: #1a73e8; }
+    .spinner { width: 16px; height: 16px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .drive-link { color: #137333; font-weight: 600; text-decoration: underline; cursor: pointer; background: none; border: none; font-size: 13px; padding: 0; font-family: inherit; }
+    .divider { border: none; border-top: 1px solid #e8eaed; margin: 0; }
+    .footer { padding: 8px 16px 12px; display: flex; flex-direction: column; gap: 8px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <svg class="header-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="28" height="28" rx="5" fill="#1a73e8"/>
+      <path d="M14 7L14 18M14 7L10 11M14 7L18 11" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="8" y="20" width="12" height="2" rx="1" fill="white"/>
+    </svg>
+    <h1>URL to Google Drive</h1>
+  </div>
+  <div class="body">
+    <div class="field-group">
+      <label>URL</label>
+      <div class="input-row">
+        <input type="text" id="urlInput" placeholder="https://example.com" />
+        <button class="btn-tab" id="currentTabBtn" title="Use current tab's URL">Current Tab</button>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Title (optional)</label>
+      <input type="text" id="titleInput" placeholder="My saved link" />
+    </div>
+    <hr class="divider" />
+    <div class="footer">
+      <div class="status" id="status">
+        <span id="statusIcon"></span>
+        <span id="statusText"></span>
+      </div>
+      <button class="btn-save" id="saveBtn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M8 2v8M8 2L5 5M8 2l3 3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12h12" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        Save to Drive
+      </button>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
